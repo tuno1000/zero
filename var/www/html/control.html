@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+var host = "http://192.168.1.200:8080/";
+
+$(document).on("click", "#btn_for",function(){
+  $.get(host + "up");
+});
+$(document).on("click", "#btn_bak",function(){
+  $.get(host + "down");
+});
+</script>
+
+</head>
+
+<body>
+<table class="table1" align="center">
+  <tr><td></td><td>
+    <img src="up.png" id="btn_for"/>
+  </td><td></td></tr>
+  <tr><td>
+    <img src="left.png" id="btn_left"/>
+  </td><td></td><td>
+    <img src="right.png" id="btn_right"/>
+  </td></tr>
+  <tr><td></td><td>
+    <img src="down.png" id="btn_bak"/>
+  </td><td></td></tr>
+</table>
+</body>

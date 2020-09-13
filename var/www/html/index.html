@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+
+<link type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<style type="text/css">
+#updownSlider {
+  height: 200px;
+  width: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#aroundSlider {
+  margin-left: auto;
+  margin-right: auto;
+  height: 30px;
+  width: 500px;
+}
+.ui-slider .ui-slider-handle {
+  margin-left: auto;
+  margin-right: auto;
+  width: 2.3em;
+  height: 2.5em;
+  border-radius: 10px;
+}
+#view {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #007bd1;
+  margin: auto;
+  display:block;
+  background-color:#FFF;
+}
+body{
+  background-color:#39C;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<br/><br/>
+<iframe id="view" src="http://192.168.1.200:8081/" width="600" height="400"></iframe>
+
+<br/>
+<div id="updownSlider"></div>
+<br/><br/>
+<div id="aroundSlider"></div>
+
+<br/><br/>
+<div align="center">
+<form action="http://192.168.1.200:8080/start-motion" method="get">
+<input type="submit" style="width:50%;padding:10px;font-size:30px;" value="motion起動">
+</form>
+<br/>
+<form action="http://192.168.1.200:8080/stop-motion" method="get">
+<input type="submit" style="width:50%;padding:10px;font-size:30px;" value="motion停止">
+</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type='text/javascript' src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+
+<script>
+var host = "http://192.168.1.200:8080/";
+
+function convDyu(i){
+  i = 14 - i;
+  return i;
+}
+
+$(function() {
+  $("#updownSlider").slider({
+    orientation: "vertical",
+    value:7,
+    min:2,
+    max:12,
+    step:0.1,
+    change : function( evnet, ui ){
+      $.get(host + "upAndDown",{"dyu": convDyu(ui.value)});
+    }
+  });
+  $("#aroundSlider").slider({
+    value:7,
+    min:2,
+    max:12,
+    step:0.1,
+    change : function( evnet, ui ){
+      $.get(host + "around",{"dyu": convDyu(ui.value)});
+    }
+  });
+});
+
+</script>
+
+</body>
+</html>
