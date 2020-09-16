@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
+import sys
 import datetime
 
 #ＧＰＩＯのポートを設定
@@ -16,7 +17,8 @@ GPIO.setup([R_VREF,R_IN1,R_IN2],GPIO.OUT)
 pwm_r = GPIO.PWM(R_VREF,100)
 pwm_r.start(100)
 
-loopTime = 1
+args = sys.argv
+loopTime = int(args[1])
 
 endTime = datetime.datetime.now() + datetime.timedelta(minutes=loopTime)
 

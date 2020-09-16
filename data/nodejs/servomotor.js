@@ -31,6 +31,13 @@ var server = http.createServer(function(req, res) {
          'Location': 'http://192.168.1.200/'
       })
       break;
+    
+    case /\/moter.*/.test(req.url):
+      execSync('python3 /root/py/moter.py ' + url_parse.query.time);
+      res.writeHead(302, {
+         'Location': 'http://192.168.1.200/'
+      })
+      break;
   }
 
   res.end();
